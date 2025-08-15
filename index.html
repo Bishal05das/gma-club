@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ময়মনসিংহ জেলা সমিতি</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo-container left-logo">
+                <img src="gma.jpg" alt="Logo 1" class="logo">
+            </div>
+            <div class="header-title">
+                <div class="subheading">
+                    হাওর-বাঁওড়-মইষের শিং—এই তিনে মৈমনসিং
+                </div>
+                <h1>বৃহত্তর ময়মনসিংহ জেলা সমিতি</h1>
+                <div class="university">
+                    রাজশাহী প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়<br>
+                    কাজলা, রাজশাহী-৬২০৪, বাংলাদেশ
+                </div>
+            </div>
+            <div class="logo-container right-logo">
+                <img src="ruet.png" alt="Logo 2" class="logo">
+            </div>
+
+            <div class="header-actions">
+                <button class="btn" onclick="showLoginModal()" id="loginBtn">Login as Admin</button>
+                <button class="btn btn-danger" onclick="logout()" id="logoutBtn" style="display: none;">Logout</button>
+            </div>
+        </div>
+
+        <!-- Notice Board Section -->
+        <div class="notice-board">
+            <h2>নোটিশ বোর্ড</h2>
+            <div class="notices-container" id="noticesContainer">
+                <!-- Notices will be loaded here -->
+            </div>
+            <div class="add-notice-form" id="addNoticeForm" style="display: none;">
+                <textarea id="newNoticeText" placeholder="Enter new notice..."></textarea>
+                <button class="btn btn-success" onclick="addNotice()">Post Notice</button>
+            </div>
+        </div>
+
+        <!-- Advisors Section -->
+        <div class="advisors-section">
+            <h2>আমাদের উপদেষ্টা</h2>
+            <div class="advisors-container" id="advisorsContainer">
+                <!-- Advisors will be loaded here -->
+            </div>
+            <div class="add-advisor-form" id="addAdvisorForm" style="display: none;">
+                <div class="form-group">
+                    <label for="advisorName">Name:</label>
+                    <input type="text" id="advisorName" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label for="advisorPosition">Position:</label>
+                    <input type="text" id="advisorPosition" placeholder="Position/Title">
+                </div>
+                <div class="form-group">
+                    <label for="advisorDepartment">Department:</label>
+                    <input type="text" id="advisorDepartment" placeholder="Department">
+                </div>
+                <div class="form-group">
+                    <label for="advisorPhone">Phone:</label>
+                    <input type="text" id="advisorPhone" placeholder="Phone Number">
+                </div>
+                <div class="form-group">
+                    <label for="advisorEmail">Email:</label>
+                    <input type="email" id="advisorEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="advisorImageURL">Image URL:</label>
+                    <input type="text" id="advisorImageURL" placeholder="Image URL">
+                </div>
+                <button class="btn btn-success" onclick="addAdvisor()">Add Advisor</button>
+            </div>
+        </div>
+
+        <!-- Member Registration Form (Visible to all) -->
+        <div class="member-registration" id="memberRegistration">
+            <h2>সদস্য নিবন্ধন ফর্ম</h2>
+            <div class="member-form">
+                <div class="form-group">
+                    <label for="regName">Name:</label>
+                    <input type="text" id="regName" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regRoll">Roll:</label>
+                    <input type="text" id="regRoll" placeholder="University Roll" required>
+                </div>
+                <div class="form-group">
+                    <label for="regDepartment">Department:</label>
+                    <input type="text" id="regDepartment" placeholder="Department" required>
+                </div>
+                <div class="form-group">
+                    <label for="regHometown">Hometown:</label>
+                    <select id="regHometown" required>
+                        <option value="Mymensingh">Mymensingh</option>
+                        <option value="Sherpur">Sherpur</option>
+                        <option value="Netrokona">Netrokona</option>
+                        <option value="Jamalpur">Jamalpur</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Phone:</label>
+                    <input type="tel" id="regPhone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="regSchool">School:</label>
+                    <input type="text" id="regSchool" placeholder="School Name">
+                </div>
+                <div class="form-group">
+                    <label for="regCollege">College:</label>
+                    <input type="text" id="regCollege" placeholder="College Name">
+                </div>
+                <div class="form-group">
+                    <label for="regGender">Gender:</label>
+                    <select id="regGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regSeries">Series:</label>
+                    <input type="text" id="regSeries" placeholder="Batch/Series" required>
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="registerMember()">Register</button>
+        </div>
+
+        <!-- Admin Controls -->
+        <!-- <div class="admin-controls" id="adminControls" style="display: none;">
+            <h2>Admin Panel</h2>
+            <div class="admin-actions">
+                <button class="btn" onclick="showAddNoticeForm()">Add Notice</button>
+                <button class="btn" onclick="showAddAdvisorForm()">Add Advisor</button>
+                <button class="btn" onclick="showAllMembers()">View All Members</button>
+                <button class="btn" onclick="exportToCSV()" id="exportBtn">Export CSV</button>
+            </div>
+        </div> -->
+
+
+
+        <!-- Search and Filter Controls -->
+        <!-- Search and Filter Controls -->
+<div class="controls-section" id="controlsSection">
+    <div class="search-filters">
+        <div class="form-group">
+            <label for="searchInput">Search Members:</label>
+            <input type="text" id="searchInput" placeholder="Search by name, roll, department..." onkeyup="filterMembers()">
+        </div>
+        <div class="form-group">
+            <label for="hometownFilter">Filter by Hometown:</label>
+            <select id="hometownFilter" onchange="filterMembers()">
+                <option value="">All Hometowns</option>
+                <option value="Mymensingh">Mymensingh</option>
+                <option value="Sherpur">Sherpur</option>
+                <option value="Netrokona">Netrokona</option>
+                <option value="Jamalpur">Jamalpur</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="departmentFilter">Filter by Department:</label>
+            <input type="text" id="departmentFilter" placeholder="Department" onkeyup="filterMembers()">
+        </div>
+        <div class="form-group">
+            <label for="seriesFilter">Filter by Series:</label>
+            <input type="text" id="seriesFilter" placeholder="Series" onkeyup="filterMembers()">
+        </div>
+        <div class="form-group">
+            <label for="itemsPerPage">Items per page:</label>
+            <select id="itemsPerPage" onchange="changeItemsPerPage()">
+                <option value="25">25</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+            </select>
+        </div>
+        <div class="form-group" id="exportBtnContainer" style="display: none;">
+            <button class="btn" onclick="exportToCSV()">Export CSV</button>
+        </div>
+    </div>
+</div>
+
+        <!-- Members Table -->
+        <div class="table-container" id="tableContainer">
+            <div id="emptyState" class="empty-state">
+                <h3>No Members Found</h3>
+                <p>No members have registered yet.</p>
+            </div>
+            
+            <div class="table-wrapper" id="tableWrapper" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('name')">Name <span class="sort-icon"></span></th>
+                            <th onclick="sortTable('roll')">Roll <span class="sort-icon"></span></th>
+                            <th onclick="sortTable('department')">Department <span class="sort-icon"></span></th>
+                            <th onclick="sortTable('hometown')">Hometown <span class="sort-icon"></span></th>
+                            <th onclick="sortTable('series')">Series <span class="sort-icon"></span></th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>School/College</th>
+                            <th id="actionsHeader" style="display: none;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination" id="paginationSection" style="display: none;">
+                <button class="btn" onclick="previousPage()" id="prevBtn">Previous</button>
+                <span class="pagination-info" id="paginationInfo"></span>
+                <button class="btn" onclick="nextPage()" id="nextBtn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Admin Login</h2>
+            <div class="form-group" style="margin: 20px 0;">
+                <label for="adminPassword">Admin Password:</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password">
+            </div>
+            <button class="btn btn-success" onclick="login()">Login</button>
+            <button class="btn" onclick="closeLoginModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Edit Member Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Member</h2>
+            <div class="member-form">
+                <div class="form-group">
+                    <label for="editName">Name:</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editRoll">Roll:</label>
+                    <input type="text" id="editRoll" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDepartment">Department:</label>
+                    <input type="text" id="editDepartment" required>
+                </div>
+                <div class="form-group">
+                    <label for="editHometown">Hometown:</label>
+                    <select id="editHometown" required>
+                        <option value="Mymensingh">Mymensingh</option>
+                        <option value="Sherpur">Sherpur</option>
+                        <option value="Netrokona">Netrokona</option>
+                        <option value="Jamalpur">Jamalpur</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editPhone">Phone:</label>
+                    <input type="tel" id="editPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editSchool">School:</label>
+                    <input type="text" id="editSchool">
+                </div>
+                <div class="form-group">
+                    <label for="editCollege">College:</label>
+                    <input type="text" id="editCollege">
+                </div>
+                <div class="form-group">
+                    <label for="editGender">Gender:</label>
+                    <select id="editGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editSeries">Series:</label>
+                    <input type="text" id="editSeries" required>
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="updateMember()">Update Member</button>
+            <button class="btn" onclick="closeEditModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
